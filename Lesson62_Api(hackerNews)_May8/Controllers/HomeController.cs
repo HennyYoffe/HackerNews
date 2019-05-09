@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Lesson62_Api_hackerNews__May8.Models;
+using ClassLibrary1;
 
 namespace Lesson62_Api_hackerNews__May8.Controllers
 {
@@ -12,32 +13,13 @@ namespace Lesson62_Api_hackerNews__May8.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var api = new HackerNewsApi();
+            List<HackerNews> hn = api.Get20News();
+            return View(hn);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+     
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }
